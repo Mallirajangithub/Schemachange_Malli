@@ -36,6 +36,18 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run schemachange
+        env:
+          SF_ACCOUNT: ${{ variables.SF_ACCOUNT }}
+          SF_DATABASE: ${{ variables.SF_DATABASE }}
+          SF_ROLE: ${{ variables.SF_ROLE }}
+          SF_WH: ${{ variables.SF_WH }}
+          SF_USERNAME: ${{ secrets.SF_USERNAME }}
+          SF_PASSWORD: ${{ secrets.SF_PASSWORD }}
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          python --version
+          echo "Step 1: Installing schemachange"
+          pip install schemachange
+          
+          echo "Step 2: Running schemachange"
+          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WH -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY --create-change-history-table
