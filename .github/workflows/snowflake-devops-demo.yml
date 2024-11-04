@@ -29,10 +29,10 @@ jobs:
       # Runs a set of commands using the runners shell 
       - name: Run schemachange
         env:
-          SF_ACCOUNT: ${{ variables.SF_ACCOUNT }} 
-          SF_DATABASE: ${{ variables.SF_DATABASE }}
-          SF_ROLE: ${{ variables.SF_ROLE }}
-          SF_WH: ${{ variables.SF_WH }}
+          SF_ACCOUNT: ${{ vars.SF_ACCOUNT }} 
+          SF_DATABASE: ${{ vars.SF_DATABASE }}
+          SF_ROLE: ${{ vars.SF_ROLE }}
+          SF_WH: ${{ vars.SF_WH }}
           SF_USERNAME: ${{ secrets.SF_USERNAME }}
           SF_PASSWORD: ${{ secrets.SF_PASSWORD }}
         run: |
